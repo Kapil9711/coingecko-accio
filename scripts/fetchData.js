@@ -21,7 +21,6 @@ function useFetch(url) {
   React.useEffect(() => {
     dispatch({ type: "Loading" });
     const controller = new AbortController();
-
     const res = fetch(url, { signal: controller.signal });
     res
       .then((res) => {

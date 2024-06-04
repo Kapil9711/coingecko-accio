@@ -120,14 +120,14 @@ const TableData = ({ ele }) => {
     name,
     symbol,
     current_price,
-    fully_diluted_valuation,
+    total_volume,
     price_change_percentage_24h: percentage,
     market_cap,
     id,
     image,
   } = ele;
 
-  const valuation = getFormatedPrice(fully_diluted_valuation);
+  const totalVolume = getFormatedPrice(total_volume);
   const marketCap = getFormatedPrice(market_cap);
 
   return (
@@ -142,7 +142,7 @@ const TableData = ({ ele }) => {
       </td>
       <td>{symbol.toUpperCase()}</td>
       <td>${current_price}</td>
-      <td>${valuation}</td>
+      <td>${totalVolume}</td>
       <td style={{ color: `${percentage > 0 ? "green" : "red"}` }}>
         {percentage.toFixed(2)}%
       </td>
