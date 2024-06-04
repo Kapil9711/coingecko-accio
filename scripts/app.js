@@ -127,6 +127,9 @@ const TableData = ({ ele }) => {
     image,
   } = ele;
 
+  const valuation = getFormatedPrice(fully_diluted_valuation);
+  const marketCap = getFormatedPrice(market_cap);
+
   return (
     <tr key={id}>
       <td style={{ display: "flex", gap: "16px", alignItems: "center" }}>
@@ -139,13 +142,17 @@ const TableData = ({ ele }) => {
       </td>
       <td>{symbol.toUpperCase()}</td>
       <td>${current_price}</td>
-      <td>${fully_diluted_valuation}</td>
+      <td>${valuation}</td>
       <td style={{ color: `${percentage > 0 ? "green" : "red"}` }}>
         {percentage.toFixed(2)}%
       </td>
-      <td>Mkt Cap: ${market_cap}</td>
+      <td>Mkt Cap: ${marketCap}</td>
     </tr>
   );
+};
+
+const getFormatedPrice = (price) => {
+  return new Intl.NumberFormat().format(price);
 };
 
 //Main-end
