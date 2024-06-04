@@ -9,14 +9,12 @@ const filterData = (data, sortInputs) => {
   });
 
   if (sortByMktCap)
-    filteredData.sort((a, b) => Number(b.market_cap) - Number(a.market_cap));
+    filteredData.sort((a, b) => Number(a.market_cap) - Number(b.market_cap));
   if (sortByPercentage)
     filteredData.sort(
       (a, b) =>
-        Number(b.price_change_percentage_24h) -
-        Number(a.price_change_percentage_24h)
+        Number(a.price_change_percentage_24h) -
+        Number(b.price_change_percentage_24h)
     );
   return filteredData;
 };
-
-
