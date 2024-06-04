@@ -87,13 +87,14 @@ table tr td:first-child {
   text-align: left;
 }
 table tr td:last-child {
-  width: 250px;
+  width: 270px;
 }
 table td:nth-of-type(3) {
   width: 180px;
 }
 table td:nth-of-type(5) {
   width: 120px;
+  text-align: right;
 }
 
 /*# sourceMappingURL=styles.css.map */
