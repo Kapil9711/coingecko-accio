@@ -2,15 +2,61 @@
 
 const rootElement = document.getElementById("root");
 const root = ReactDOM.createRoot(rootElement);
-root.render(<App />);
+root.render(<Test />);
+
+function Test() {
+  const [isActives, setIsActives] = React.useState({
+    then: true,
+    await: false,
+  });
+
+  const handleClick = (e) => {
+    const id = e.target.id;
+
+    if (id === "then") {
+      if (isActives.then) return;
+      return setIsActives({ then: true, await: false });
+    }
+    if (isActives.await) return;
+    setIsActives({ then: false, await: true });
+  };
+  return (
+    <>
+      <section className="test">
+        <h1>Test : </h1>
+        <button
+          style={{ display: !isActives.then ? "none" : "initial" }}
+          onClick={handleClick}
+          className={isActives.then ? "active" : ""}
+          id="then"
+        >
+          using-Then
+        </button>
+        <button
+          onClick={handleClick}
+          className={isActives.await ? "active" : ""}
+          id="await"
+        >
+          Async/Await
+        </button>
+      </section>
+      <App {...{ isActives }} />
+    </>
+  );
+}
+
+//*************************************************** */
 
 const url =
   "https://api.coingecko.com/api/v3/coins/markets?vs_currency=usd&order=market_cap_desc&per_page=10&page=1&sparkline=false";
 
 // app-start
 
-function App() {
-  const { data, isLoading, isError } = useFetch(url);
+function App({ isActives }) {
+  console.log("app rerendered");
+  const { data, isLoading, isError } = (
+    isActives.then ? useFetchUsingThen : useFetchAsyncAwait
+  )(url, isActives);
   const [sortInputs, setSortInputs] = React.useState({
     searchInput: "",
     sortByMktCap: false,
@@ -85,7 +131,7 @@ function Main(props) {
 
   return (
     <main>
-      <Message {...{ isError, isLoading }} />
+      <Message {...{ isLoading, isError }} />
       <table>
         <tbody>
           {filteredData.map((ele) => (
@@ -132,12 +178,8 @@ const TableData = ({ ele }) => {
 
   return (
     <tr key={id}>
-      <td style={{ display: "flex", gap: "16px", alignItems: "center" }}>
-        <img
-          style={{ height: "30px", width: "30px" }}
-          src={image}
-          alt="coin-img"
-        />
+      <td>
+        <img src={image} alt="coin-img" />
         <span>{name}</span>
       </td>
       <td>{symbol.toUpperCase()}</td>
@@ -146,7 +188,7 @@ const TableData = ({ ele }) => {
       <td style={{ color: `${percentage > 0 ? "green" : "red"}` }}>
         {percentage.toFixed(2)}%
       </td>
-      <td>Mkt Cap: ${marketCap}</td>
+      <td>Mkt Cap : ${marketCap}</td>
     </tr>
   );
 };

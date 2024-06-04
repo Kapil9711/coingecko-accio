@@ -9,6 +9,7 @@ body {
   background-color: black;
   padding-block: 100px;
   color: white;
+  position: relative;
 }
 @media (max-width: 550px) {
   body {
@@ -25,6 +26,24 @@ body {
   #root {
     overflow-x: scroll;
   }
+}
+
+.test {
+  display: flex;
+  gap: 10px;
+  position: absolute;
+  top: 10px;
+  left: 40%;
+}
+.test button {
+  padding: 6px 12px;
+  background-color: transparent;
+  border: solid white;
+  color: white;
+}
+.test button.active {
+  background-color: yellow;
+  color: black;
 }
 
 header {
@@ -85,6 +104,13 @@ table td {
 }
 table tr td:first-child {
   text-align: left;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+}
+table tr td:first-child img {
+  height: 30px;
+  width: 30px;
 }
 table tr td:last-child {
   width: 270px;

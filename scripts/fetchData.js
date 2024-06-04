@@ -11,7 +11,7 @@ const fetchReducer = (state, { type, payload }) => {
   }
 };
 
-function useFetch(url) {
+function useFetchUsingThen(url, isActives) {
   const [fetchState, dispatch] = React.useReducer(fetchReducer, {
     data: [],
     isLoading: true,
@@ -36,7 +36,39 @@ function useFetch(url) {
       });
 
     return () => controller.abort();
-  }, [url]);
+  }, [url, isActives]);
+
+  return fetchState;
+}
+
+function useFetchAsyncAwait(url, isActives) {
+  const [fetchState, dispatch] = React.useReducer(fetchReducer, {
+    data: [],
+    isLoading: true,
+    isError: false,
+  });
+
+  React.useEffect(() => {
+    dispatch({ type: "Loading" });
+    const controller = new AbortController();
+
+    const fetchData = async () => {
+      try {
+        const res = await fetch(url, {
+          signal: controller.signal,
+        });
+        if (res.status === 200) {
+          const successData = await res.json();
+          dispatch({ type: "Success", payload: successData });
+        } else dispatch({ type: "Error" });
+      } catch (error) {
+        if (error.name === "AbortError") return;
+        dispatch({ type: "Error" });
+      }
+    };
+    fetchData();
+    return () => controller.abort();
+  }, [url, isActives]);
 
   return fetchState;
 }
