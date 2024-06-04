@@ -1,0 +1,99 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+body {
+  min-height: 100vh;
+  background-color: black;
+  padding-block: 100px;
+  color: white;
+}
+@media (max-width: 550px) {
+  body {
+    padding: 32px 10px;
+  }
+}
+
+#root {
+  min-height: 100vh;
+  width: 1050px;
+  margin-inline: auto;
+}
+@media (max-width: 550px) {
+  #root {
+    overflow-x: scroll;
+  }
+}
+
+header {
+  display: grid;
+  grid-template-columns: 3fr 1fr 1fr;
+  gap: 16px;
+}
+header input {
+  border: 2px solid white;
+  background-color: transparent;
+  border-radius: none;
+  height: 50px;
+  color: white;
+  padding-inline: 16px;
+  font-size: 20px;
+}
+header input::placeholder {
+  color: rgb(220, 214, 214);
+}
+header input:focus {
+  border-radius: none;
+  outline: none;
+}
+header button {
+  background-color: transparent;
+  border: 2px solid white;
+  font-size: 18px;
+  color: white;
+}
+header button:hover {
+  background-color: white;
+  color: black;
+}
+header button.active {
+  background-color: rgb(167, 240, 130);
+  color: black;
+}
+
+main {
+  padding-block: 40px;
+}
+main .msg {
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  height: 400px;
+}
+
+table {
+  width: 100%;
+  border-collapse: collapse;
+}
+table td {
+  text-align: right;
+  font-size: 20px;
+  padding-block: 24px;
+  border-bottom: 1px solid white;
+}
+table tr td:first-child {
+  text-align: left;
+}
+table tr td:last-child {
+  width: 250px;
+}
+table td:nth-of-type(3) {
+  width: 180px;
+}
+table td:nth-of-type(5) {
+  width: 120px;
+}
+
+/*# sourceMappingURL=styles.css.map */
